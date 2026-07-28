@@ -193,7 +193,7 @@ git push origin main
     </td>
     <td>
       <b>Pedro Zeferino da Silva</b><br />
-      <i>Engenheiro de Software Full Stack & Arquiteto Web</i><br /><br />
+      <i>Desenvolvedor de Software Full Stack & Web</i><br /><br />
       Projeto desenvolvido como Desafio de Projeto na <b>DIO (Digital Innovation One)</b> para demonstrar domínio prático em layout responsivo avançado com CSS Grid, HTML semântico e boas práticas de arquitetura front-end.<br /><br />
       📫 <b>Entre em contato:</b><br />
       - 🌐 <b>GitHub:</b> <a href="https://github.com/PedroZef">@PedroZef</a><br />
