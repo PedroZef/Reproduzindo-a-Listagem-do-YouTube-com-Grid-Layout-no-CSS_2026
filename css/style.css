@@ -1,0 +1,885 @@
+/* ==========================================================================
+   YouTube Video Listing - 100% PURE HTML & CSS (ZERO JAVASCRIPT)
+   Arquitetura Responsiva Avançada (Mobile First & Adaptive Breakpoints)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. ELEMENTOS OCULTOS DE CONTROLE
+   -------------------------------------------------------------------------- */
+.theme-checkbox,
+.carousel-radio {
+    display: none;
+}
+
+/* --------------------------------------------------------------------------
+   2. VARIÁVEIS DE TEMA (MODO ESCURO COMO PADRÃO FIEL A HEADER_NOVO.PNG)
+   -------------------------------------------------------------------------- */
+:root {
+    color-scheme: dark light;
+    
+    /* Modo Escuro (Default) */
+    --bg-primary: #0f0f0f;
+    --bg-surface: #0f0f0f;
+    --text-primary: #f1f1f1;
+    --text-secondary: #aaaaaa;
+    --border-color: #272727;
+    --footer-border-color: #717171;
+    --hover-overlay: rgba(255, 255, 255, 0.1);
+    
+    --search-bg: #121212;
+    --search-border: #303030;
+    --search-btn-bg: #222222;
+    --search-btn-hover: #272727;
+    
+    --btn-secondary-bg: #272727;
+    --btn-secondary-hover: #3f3f3f;
+    
+    --chip-bg: #272727;
+    --chip-hover: #3f3f3f;
+    --chip-active-bg: #f1f1f1;
+    --chip-active-color: #0f0f0f;
+    
+    --gradient-btn-bg: linear-gradient(135deg, #000000 0%, #ff007f 100%);
+    --gradient-btn-shadow: rgba(255, 0, 127, 0.4);
+    
+    --header-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
+    
+    --badge-red: #cc0000;
+    --accent-blue: #065fd4;
+    
+    --header-height: 56px;
+    --sidebar-width: 240px;
+    --grid-gap-x: 16px;
+    --grid-gap-y: 24px;
+    
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-pill: 20px;
+    
+    --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   3. MODO CLARO (LIGHT MODE ATIVADO QUANDO O CHECKBOX ESTIVER MARCADO)
+   -------------------------------------------------------------------------- */
+#theme-toggle:checked ~ .app-container {
+    color-scheme: light;
+    
+    --bg-primary: #f9f9f9;
+    --bg-surface: #ffffff;
+    --text-primary: #0f0f0f;
+    --text-secondary: #606060;
+    --border-color: #e5e5e5;
+    --footer-border-color: #cccccc;
+    --hover-overlay: rgba(0, 0, 0, 0.05);
+    
+    --search-bg: #ffffff;
+    --search-border: #ccc;
+    --search-btn-bg: #f8f8f8;
+    --search-btn-hover: #f0f0f0;
+    
+    --btn-secondary-bg: #0000000d;
+    --btn-secondary-hover: #0000001a;
+    
+    --chip-bg: #0000000d;
+    --chip-hover: #0000001a;
+    --chip-active-bg: #0f0f0f;
+    --chip-active-color: #ffffff;
+    
+    --gradient-btn-bg: linear-gradient(135deg, #1e88e5 0%, #607d8b 100%);
+    --gradient-btn-shadow: rgba(30, 136, 229, 0.3);
+    
+    --header-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   4. ESTILOS BASE E RESET
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.4;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Acessibilidade WCAG 2.1: Foco Visível para Navegação por Teclado */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+label:focus-visible {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   5. APP CONTAINER - MAIN CSS GRID LAYOUT
+   -------------------------------------------------------------------------- */
+.app-container {
+    display: grid;
+    grid-template-rows: var(--header-height) 1fr;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    grid-template-areas:
+        "header header"
+        "sidebar main";
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   6. HEADER RESPONSIVO
+   -------------------------------------------------------------------------- */
+.header {
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 200px 1fr auto;
+    align-items: center;
+    padding: 0 16px;
+    background-color: var(--bg-surface);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--header-shadow);
+    z-index: 10;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+    color: var(--text-primary);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.icon-btn:hover {
+    background-color: var(--hover-overlay);
+}
+
+.icon-btn:active {
+    transform: scale(0.95);
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.yt-brand-text {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+    margin-left: 2px;
+}
+
+.yt-country-code {
+    font-size: 10px;
+    color: var(--text-secondary);
+    margin-left: 2px;
+    top: -6px;
+    position: relative;
+}
+
+.header-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 12px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    height: 40px;
+}
+
+.search-input-wrapper {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--search-border);
+    border-right: none;
+    border-radius: 40px 0 0 40px;
+    padding: 0 12px 0 16px;
+    background-color: var(--search-bg);
+    transition: border-color 0.2s ease, background-color 0.3s ease;
+}
+
+.search-form:focus-within .search-input-wrapper {
+    border-color: var(--accent-blue);
+    box-shadow: inset 0 0 0 1px var(--accent-blue);
+}
+
+.search-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    font-family: inherit;
+    background: transparent;
+    color: var(--text-primary);
+}
+
+.virtual-keyboard-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+}
+
+.search-btn {
+    width: 64px;
+    height: 100%;
+    background-color: var(--search-btn-bg);
+    border: 1px solid var(--search-border);
+    border-left: none;
+    border-radius: 0 40px 40px 0;
+    cursor: pointer;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.search-btn:hover {
+    background-color: var(--search-btn-hover);
+}
+
+.mic-btn {
+    background-color: var(--btn-secondary-bg);
+    border-radius: 50%;
+}
+
+.mic-btn:hover {
+    background-color: var(--btn-secondary-hover);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.create-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 18px;
+    background-color: var(--btn-secondary-bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.create-btn:hover {
+    background-color: var(--btn-secondary-hover);
+}
+
+.gradient-header-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    height: 36px;
+    border: none;
+    border-radius: 18px;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+    background: var(--gradient-btn-bg);
+    box-shadow: 0 2px 8px var(--gradient-btn-shadow);
+    transition: all 0.3s ease;
+}
+
+.gradient-header-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--gradient-btn-shadow);
+}
+
+.notification-btn {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: var(--badge-red);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 1px 4px;
+    border-radius: 10px;
+    border: 2px solid var(--bg-surface);
+}
+
+.theme-toggle-btn {
+    cursor: pointer;
+}
+
+.theme-toggle-btn .sun-icon {
+    display: block;
+}
+
+.theme-toggle-btn .moon-icon {
+    display: none;
+}
+
+#theme-toggle:checked ~ .app-container .theme-toggle-btn .sun-icon {
+    display: none;
+}
+
+#theme-toggle:checked ~ .app-container .theme-toggle-btn .moon-icon {
+    display: block;
+}
+
+.user-initial-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: #005944;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   7. SIDEBAR RESPONSIVA
+   -------------------------------------------------------------------------- */
+.sidebar {
+    grid-area: sidebar;
+    background-color: var(--bg-surface);
+    overflow-y: auto;
+    padding: 12px 0;
+    border-right: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item {
+    padding: 0 12px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    transition: background-color 0.15s ease;
+}
+
+.nav-link:hover {
+    background-color: var(--hover-overlay);
+}
+
+.nav-item.active .nav-link {
+    background-color: var(--hover-overlay);
+    font-weight: 500;
+}
+
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    filter: invert(0.9);
+    transition: filter 0.3s ease;
+}
+
+#theme-toggle:checked ~ .app-container .nav-icon {
+    filter: none;
+}
+
+.nav-divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 12px 0;
+}
+
+/* --------------------------------------------------------------------------
+   8. MAIN CONTENT & CATEGORY CHIPS
+   -------------------------------------------------------------------------- */
+.main-content {
+    grid-area: main;
+    padding: 0 24px 24px 24px;
+    background-color: var(--bg-primary);
+    overflow-y: auto;
+    transition: background-color 0.3s ease;
+}
+
+.category-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0 16px 0;
+    background-color: var(--bg-primary);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    transition: background-color 0.3s ease;
+}
+
+.category-home-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 10px;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding-right: 8px;
+}
+
+.category-chips-overflow {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.category-chips-track {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+#cat-p2:checked ~ .app-container .category-chips-track {
+    transform: translateX(-520px);
+}
+
+.chip {
+    padding: 6px 12px;
+    border-radius: 8px;
+    background-color: var(--chip-bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    border: none;
+    white-space: nowrap;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.2s ease;
+}
+
+.chip:hover {
+    background-color: var(--chip-hover);
+}
+
+.chip.active {
+    background-color: var(--chip-active-bg);
+    color: var(--chip-active-color);
+    font-weight: 500;
+}
+
+.chip-scroll-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--btn-secondary-bg);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.chip-scroll-btn:hover {
+    background-color: var(--btn-secondary-hover);
+    transform: scale(1.08);
+}
+
+.btn-prev {
+    display: none;
+}
+
+.btn-next {
+    display: flex;
+}
+
+#cat-p2:checked ~ .app-container .btn-next {
+    display: none;
+}
+
+#cat-p2:checked ~ .app-container .btn-prev {
+    display: flex;
+}
+
+/* --------------------------------------------------------------------------
+   9. VIDEO GRID
+   -------------------------------------------------------------------------- */
+.video-section {
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: var(--grid-gap-x);
+    row-gap: var(--grid-gap-y);
+}
+
+.video-card {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.thumbnail-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #272727;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.thumbnail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.video-card:hover .thumbnail-img {
+    transform: scale(1.03);
+}
+
+.video-duration {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 4px;
+    border-radius: var(--radius-sm);
+}
+
+.video-duration.live {
+    background-color: var(--badge-red);
+    animation: pulse-live 2s infinite ease-in-out;
+}
+
+@keyframes pulse-live {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.selected-card .thumbnail-container {
+    border: 3px solid #065fd4;
+    box-shadow: 0 0 8px rgba(6, 95, 212, 0.4);
+}
+
+.video-details {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    column-gap: 12px;
+    margin-top: 12px;
+}
+
+.channel-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.channel-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.video-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.channel-name, .video-stats {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   10. FOOTER COM BORDA DE 1PX CINZA NA PARTE SUPERIOR
+   -------------------------------------------------------------------------- */
+.app-footer {
+    margin-top: 48px;
+    padding: 24px 0 32px 0;
+    border-top: 1px solid var(--footer-border-color);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   11. BARRA DE NAVEGAÇÃO INFERIOR PARA TELAS MÓVEIS (MOBILE BOTTOM NAV BAR)
+   -------------------------------------------------------------------------- */
+.mobile-bottom-nav {
+    display: none; /* Oculto por padrão em telas grandes */
+}
+
+/* --------------------------------------------------------------------------
+   12. ADAPTAÇÕES RESPONSIVAS PASSO A PASSO (MEDIA QUERIES)
+   -------------------------------------------------------------------------- */
+
+/* Telas Médias / Laptops Compactos (1000px a 1300px) */
+@media (max-width: 1300px) {
+    .video-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablets em Modo Paisagem / Desktops Pequenos (768px a 999px) */
+@media (max-width: 999px) {
+    .app-container {
+        grid-template-columns: 72px 1fr;
+    }
+    
+    .sidebar {
+        padding: 8px 4px;
+    }
+    
+    .nav-link {
+        flex-direction: column;
+        gap: 6px;
+        padding: 12px 4px;
+        text-align: center;
+    }
+    
+    .nav-label {
+        font-size: 10px;
+    }
+    
+    .nav-divider {
+        margin: 8px 0;
+    }
+    
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Dispositivos Móveis e Tablets Retrato (Até 640px) */
+@media (max-width: 640px) {
+    /* 1. Reestruturação do Grid Principal */
+    .app-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: var(--header-height) 1fr;
+        grid-template-areas:
+            "header"
+            "main";
+    }
+    
+    /* 2. Ocultar a Sidebar Lateral em Telas Pequenas */
+    .sidebar {
+        display: none;
+    }
+    
+    /* 3. Header Ajustado para Mobile */
+    .header {
+        grid-template-columns: auto 1fr auto;
+        padding: 0 8px;
+        gap: 8px;
+    }
+    
+    .header-left {
+        gap: 8px;
+    }
+    
+    .yt-brand-text {
+        font-size: 16px;
+    }
+    
+    .yt-country-code {
+        display: none;
+    }
+    
+    .virtual-keyboard-btn {
+        display: none;
+    }
+    
+    /* Ocultar texto dos botões de ação para economizar espaço */
+    .btn-text {
+        display: none;
+    }
+    
+    .create-btn,
+    .gradient-header-btn {
+        padding: 0 10px;
+        border-radius: 50%;
+        min-width: 36px;
+        height: 36px;
+        justify-content: center;
+    }
+    
+    .mic-btn {
+        display: none; /* Ocultar mic no mobile para otimizar espaço da busca */
+    }
+
+    .search-form {
+        max-width: none;
+    }
+    
+    .main-content {
+        padding: 0 12px 72px 12px; /* Margem inferior para a barra mobile não cobrir o rodapé */
+    }
+    
+    /* 4. Carrossel da Category Bar no Mobile */
+    .category-chips-overflow {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .chip-scroll-btn {
+        display: none !important; /* No celular utiliza-se o gesto de deslizar diretamente */
+    }
+    
+    /* 5. Grade de Vídeos em 1 Coluna em Telas Pequenas */
+    .video-grid {
+        grid-template-columns: 1fr;
+        row-gap: 20px;
+    }
+    
+    .thumbnail-container {
+        border-radius: 0; /* Estilo nativo do app YouTube mobile com thumbnail de ponta a ponta */
+        margin: 0 -12px;
+        width: calc(100% + 24px);
+    }
+    
+    /* 6. Exibição da Barra de Navegação Inferior (Bottom Bar UX) */
+    .mobile-bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 56px;
+        background-color: var(--bg-surface);
+        border-top: 1px solid var(--border-color);
+        z-index: 100;
+        justify-content: space-around;
+        align-items: center;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    
+    .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-size: 10px;
+        flex: 1;
+    }
+    
+    .mobile-nav-item.active {
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+    
+    .mobile-nav-icon {
+        width: 20px;
+        height: 20px;
+        filter: invert(0.9);
+    }
+    
+    #theme-toggle:checked ~ .app-container .mobile-nav-icon {
+        filter: none;
+    }
+    
+    .mobile-avatar-icon {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background-color: #005944;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: bold;
+    }
+    
+    .app-footer {
+        margin-top: 32px;
+        padding-bottom: 24px;
+    }
+}

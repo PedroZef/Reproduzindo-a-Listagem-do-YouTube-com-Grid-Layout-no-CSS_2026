@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página de listagem de vídeos no estilo YouTube BR construída com HTML5 semântico, CSS Grid Layout, carrossel e alternância de temas 100% livres de JavaScript.">
+    <meta name="theme-color" content="#0f0f0f">
+    <title>YouTube BR - Página de Vídeos (Puro HTML & CSS)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Checkbox Tecnico para Alternar Tema sem JS (CSS Checkbox Hack) -->
+    <input type="checkbox" id="theme-toggle" class="theme-checkbox" aria-label="Alternar Tema Claro e Escuro">
+
+    <!-- Radios Tecnicos para o Carrossel da Category Bar sem JS -->
+    <input type="radio" name="cat-carousel" id="cat-p1" class="carousel-radio" checked aria-label="Página 1 do Carrossel">
+    <input type="radio" name="cat-carousel" id="cat-p2" class="carousel-radio" aria-label="Página 2 do Carrossel">
+
+    <!-- App Container usando CSS Grid para a estrutura master -->
+    <div class="app-container">
+        
+        <!-- Header Principal Responsivo -->
+        <header class="header" role="banner">
+            <div class="header-left">
+                <button class="icon-btn menu-btn" aria-label="Abrir menu lateral">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </button>
+                <a href="#" class="brand-logo" title="Página Inicial do YouTube BR" aria-label="Página Inicial do YouTube BR">
+                    <div class="logo-wrapper">
+                        <svg width="30" height="22" viewBox="0 0 30 22" fill="none" aria-hidden="true">
+                            <path d="M29.3 3.3c-.3-1.2-1.3-2.2-2.5-2.5C24.6 0 15 0 15 0S5.4 0 3.2.8C2 1.1 1 2.1.7 3.3 0 5.5 0 11 0 11s0 5.5.7 7.7c.3 1.2 1.3 2.2 2.5 2.5 2.2.8 11.8.8 11.8.8s9.6 0 11.8-.8c1.2-.3 2.2-1.3 2.5-2.5.7-2.2.7-7.7.7-7.7s0-5.5-.7-7.7z" fill="#FF0000"/>
+                            <path d="M12 15.5l7.8-4.5L12 6.5v9z" fill="#FFFFFF"/>
+                        </svg>
+                        <span class="yt-brand-text">YouTube</span>
+                        <sup class="yt-country-code">BR</sup>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-center">
+                <form class="search-form" action="#" method="GET" role="search" aria-label="Pesquisar vídeos">
+                    <div class="search-input-wrapper">
+                        <input type="text" class="search-input" placeholder="Pesquisar" aria-label="Pesquisar conteúdo">
+                        <button type="button" class="virtual-keyboard-btn" title="Teclado virtual" aria-label="Abrir teclado virtual">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M20 5H4c-1.1 0-1.99.9-1.99 2L2 17c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2V8zm0 3h2v2h-2v-2zM8 8h2v2H8V8zm0 3h2v2H8v-2zm-3 0h2v2H5v-2zm0-3h2v2H5V8zm10 7H9v-2h6v2zm1-4h-2v-2h2v2zm0-3h-2V8h2v2zm3 7h-2v-2h2v2zm0-3h-2v-2h2v2z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <button type="submit" class="search-btn" title="Pesquisar" aria-label="Confirmar pesquisa">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                    </button>
+                </form>
+
+                <button class="icon-btn mic-btn" title="Pesquisar com sua voz" aria-label="Pesquisar com voz">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                        <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="header-right">
+                <button class="create-btn" title="Criar conteúdo" aria-label="Criar vídeo ou postagem">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                    <span class="btn-text">Criar</span>
+                </button>
+
+                <button class="gradient-header-btn" title="Recurso Especial Premium" aria-label="Recurso Premium">
+                    <span class="btn-sparkle" aria-hidden="true">✦</span>
+                    <span class="btn-text">Premium</span>
+                </button>
+
+                <button class="icon-btn notification-btn" title="Notificações" aria-label="Notificações de usuário">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+                    </svg>
+                    <span class="notification-badge">9+</span>
+                </button>
+
+                <!-- Toggle Label do Tema (Pure CSS) -->
+                <label for="theme-toggle" class="icon-btn theme-toggle-btn" title="Alternar Modo Claro / Escuro" aria-label="Alternar Tema Claro / Escuro">
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+                    </svg>
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+                    </svg>
+                </label>
+
+                <div class="user-avatar-btn user-initial-avatar" title="Pedro Zeferino da Silva" aria-label="Perfil de Pedro Zeferino da Silva">
+                    <span>P</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar Lateral (Desktop & Tablet) -->
+        <aside class="sidebar" role="navigation" aria-label="Navegação Principal">
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link">
+                            <img src="assets/icons/home.svg" alt="Início" class="nav-icon">
+                            <span class="nav-label">Início</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <img src="assets/icons/compass.svg" alt="Explorar" class="nav-icon">
+                            <span class="nav-label">Explorar</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <img src="assets/icons/subscriptions.svg" alt="Inscrições" class="nav-icon">
+                            <span class="nav-label">Inscrições</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-divider"></li>
+                    
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <img src="assets/icons/disc.svg" alt="YouTube Music" class="nav-icon">
+                            <span class="nav-label">YouTube Music</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <img src="assets/icons/thumbs-up.svg" alt="Vídeos que gostei" class="nav-icon">
+                            <span class="nav-label">Vídeos que gostei</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <img src="assets/icons/clock.svg" alt="Assistir mais tarde" class="nav-icon">
+                            <span class="nav-label">Assistir mais tarde</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <img src="assets/icons/download.svg" alt="Downloads" class="nav-icon">
+                            <span class="nav-label">Downloads</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-divider"></li>
+                    
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <img src="assets/icons/film.svg" alt="Filmes" class="nav-icon">
+                            <span class="nav-label">Filmes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <img src="assets/icons/book.svg" alt="Aprender" class="nav-icon">
+                            <span class="nav-label">Aprender</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <img src="assets/icons/trophy.svg" alt="Esportes" class="nav-icon">
+                            <span class="nav-label">Esportes</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content" role="main">
+            
+            <!-- Carrossel da Barra de Categorias -->
+            <nav class="category-bar" aria-label="Filtro de Categorias">
+                <div class="category-home-item" title="Voltar ao início">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    <span>Início</span>
+                </div>
+                
+                <div class="category-chips-overflow">
+                    <div class="category-chips-track">
+                        <button class="chip active">Tudo</button>
+                        <button class="chip">API</button>
+                        <button class="chip">Podcasts</button>
+                        <button class="chip">Sistema operacional</button>
+                        <button class="chip">Suspenses de ação</button>
+                        <button class="chip">Ao vivo</button>
+                        <button class="chip">Música</button>
+                        <button class="chip">Jogos</button>
+                        <button class="chip">Televisores inteligentes</button>
+                        <button class="chip">Clube Atlético Mineiro</button>
+                        <button class="chip">Tecnologia</button>
+                        <button class="chip">Programação</button>
+                        <button class="chip">Engenharia</button>
+                        <button class="chip">Ciência de Dados</button>
+                        <button class="chip">Machine Learning</button>
+                        <button class="chip">UI/UX Design</button>
+                    </div>
+                </div>
+
+                <label for="cat-p2" class="chip-scroll-btn btn-next" title="Avançar carrossel" aria-label="Avançar carrossel de categorias">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </label>
+                <label for="cat-p1" class="chip-scroll-btn btn-prev" title="Voltar carrossel" aria-label="Voltar carrossel de categorias">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </label>
+            </nav>
+
+            <!-- Seção de Grade de Vídeos -->
+            <section class="video-section" aria-label="Lista de Vídeos">
+                <div class="video-grid">
+
+                    <!-- Video Card 1 -->
+                    <article class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="assets/img/thumbs/Ciencia de Dados Unimed BH.jpg" alt="Geração Tech Unimed - BH - Ciência de Dados" class="thumbnail-img" loading="lazy">
+                            <span class="video-duration live">Ao vivo</span>
+                        </div>
+                        <div class="video-details">
+                            <div class="channel-avatar">
+                                <img src="assets/img/channels/Channel Avatar.svg" alt="Avatar do canal dio.">
+                            </div>
+                            <div class="video-meta">
+                                <h3 class="video-title" title="Geração Tech Unimed - BH - Ciência de Dados">Geração Tech Unimed - BH - Ciência de Dados</h3>
+                                <p class="channel-name">dio.</p>
+                                <p class="video-stats">2,1 mil visualizações &bull; Transmitido há 2 dias</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Video Card 2 (Featured/Focused) -->
+                    <article class="video-card selected-card">
+                        <div class="thumbnail-container">
+                            <img src="assets/img/thumbs/Scrum Talks.jpg" alt="Scrum Talks" class="thumbnail-img" loading="lazy">
+                            <span class="video-duration">15:42</span>
+                        </div>
+                        <div class="video-details">
+                            <div class="channel-avatar">
+                                <img src="assets/img/channels/Channel Avatar.svg" alt="Avatar do canal dio.">
+                            </div>
+                            <div class="video-meta">
+                                <h3 class="video-title" title="Scrum Talks">Scrum Talks</h3>
+                                <p class="channel-name">dio.</p>
+                                <p class="video-stats">1,6 mil visualizações &bull; Transmitido há 3 dias</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Video Card 3 -->
+                    <article class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="assets/img/thumbs/Machine Learning.jpg" alt="Machine Learning Avançado - Fast Track" class="thumbnail-img" loading="lazy">
+                            <span class="video-duration">42:10</span>
+                        </div>
+                        <div class="video-details">
+                            <div class="channel-avatar">
+                                <img src="assets/img/channels/Channel Avatar.svg" alt="Avatar do canal dio.">
+                            </div>
+                            <div class="video-meta">
+                                <h3 class="video-title" title="Machine Learning Avançado - Fast Track">Machine Learning Avançado - Fast Track</h3>
+                                <p class="channel-name">dio.</p>
+                                <p class="video-stats">1,7 mil visualizações &bull; Transmitido há 4 dias</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Video Card 4 -->
+                    <article class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="assets/img/thumbs/Project Planing.jpg" alt="Global Skills #2 - Project Planning" class="thumbnail-img" loading="lazy">
+                            <span class="video-duration">28:15</span>
+                        </div>
+                        <div class="video-details">
+                            <div class="channel-avatar">
+                                <img src="assets/img/channels/Channel Avatar.svg" alt="Avatar do canal dio.">
+                            </div>
+                            <div class="video-meta">
+                                <h3 class="video-title" title="Global Skills #2 - Project Planning">Global Skills #2 - Project Planning</h3>
+                                <p class="channel-name">dio.</p>
+                                <p class="video-stats">2,1 mil visualizações &bull; Transmitido há 2 dias</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Video Card 5 -->
+                    <article class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="assets/img/thumbs/Como aprender Phython do Zero.jpg" alt="Como aprender a programar Python do ZERO" class="thumbnail-img" loading="lazy">
+                            <span class="video-duration">1:12:05</span>
+                        </div>
+                        <div class="video-details">
+                            <div class="channel-avatar">
+                                <img src="assets/img/channels/Channel Avatar.svg" alt="Avatar do canal dio.">
+                            </div>
+                            <div class="video-meta">
+                                <h3 class="video-title" title="Como aprender a programar Python do ZERO">Como aprender a programar Python do ZERO</h3>
+                                <p class="channel-name">dio.</p>
+                                <p class="video-stats">711 visualizações &bull; Transmitido há 2 dias</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Video Card 6 -->
+                    <article class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="assets/img/thumbs/Ciencia de Dados Unimed BH.jpg" alt="Geração Tech Unimed - BH - Ciência de Dados" class="thumbnail-img" loading="lazy">
+                            <span class="video-duration live">Ao vivo</span>
+                        </div>
+                        <div class="video-details">
+                            <div class="channel-avatar">
+                                <img src="assets/img/channels/Channel Avatar.svg" alt="Avatar do canal dio.">
+                            </div>
+                            <div class="video-meta">
+                                <h3 class="video-title" title="Geração Tech Unimed - BH - Ciência de Dados">Geração Tech Unimed - BH - Ciência de Dados</h3>
+                                <p class="channel-name">dio.</p>
+                                <p class="video-stats">2,1 mil visualizações &bull; Transmitido há 2 dias</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Video Card 7 -->
+                    <article class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="assets/img/thumbs/Scrum Talks.jpg" alt="Scrum Talks" class="thumbnail-img" loading="lazy">
+                            <span class="video-duration">15:42</span>
+                        </div>
+                        <div class="video-details">
+                            <div class="channel-avatar">
+                                <img src="assets/img/channels/Channel Avatar.svg" alt="Avatar do canal dio.">
+                            </div>
+                            <div class="video-meta">
+                                <h3 class="video-title" title="Scrum Talks">Scrum Talks</h3>
+                                <p class="channel-name">dio.</p>
+                                <p class="video-stats">1,6 mil visualizações &bull; Transmitido há 3 dias</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Video Card 8 -->
+                    <article class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="assets/img/thumbs/Machine Learning.jpg" alt="Machine Learning Avançado - Fast Track" class="thumbnail-img" loading="lazy">
+                            <span class="video-duration">42:10</span>
+                        </div>
+                        <div class="video-details">
+                            <div class="channel-avatar">
+                                <img src="assets/img/channels/Channel Avatar.svg" alt="Avatar do canal dio.">
+                            </div>
+                            <div class="video-meta">
+                                <h3 class="video-title" title="Machine Learning Avançado - Fast Track">Machine Learning Avançado - Fast Track</h3>
+                                <p class="channel-name">dio.</p>
+                                <p class="video-stats">1,7 mil visualizações &bull; Transmitido há 4 dias</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Video Card 9 -->
+                    <article class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="assets/img/thumbs/Scrum Talks.jpg" alt="Scrum Talks" class="thumbnail-img" loading="lazy">
+                            <span class="video-duration">15:42</span>
+                        </div>
+                        <div class="video-details">
+                            <div class="channel-avatar">
+                                <img src="assets/img/channels/Channel Avatar.svg" alt="Avatar do canal dio.">
+                            </div>
+                            <div class="video-meta">
+                                <h3 class="video-title" title="Scrum Talks">Scrum Talks</h3>
+                                <p class="channel-name">dio.</p>
+                                <p class="video-stats">1,6 mil visualizações &bull; Transmitido há 3 dias</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Video Card 10 -->
+                    <article class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="assets/img/thumbs/Machine Learning.jpg" alt="Machine Learning Avançado - Fast Track" class="thumbnail-img" loading="lazy">
+                            <span class="video-duration">42:10</span>
+                        </div>
+                        <div class="video-details">
+                            <div class="channel-avatar">
+                                <img src="assets/img/channels/Channel Avatar.svg" alt="Avatar do canal dio.">
+                            </div>
+                            <div class="video-meta">
+                                <h3 class="video-title" title="Machine Learning Avançado - Fast Track">Machine Learning Avançado - Fast Track</h3>
+                                <p class="channel-name">dio.</p>
+                                <p class="video-stats">1,7 mil visualizações &bull; Transmitido há 4 dias</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Video Card 11 -->
+                    <article class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="assets/img/thumbs/Project Planing.jpg" alt="Global Skills #2 - Project Planning" class="thumbnail-img" loading="lazy">
+                            <span class="video-duration">28:15</span>
+                        </div>
+                        <div class="video-details">
+                            <div class="channel-avatar">
+                                <img src="assets/img/channels/Channel Avatar.svg" alt="Avatar do canal dio.">
+                            </div>
+                            <div class="video-meta">
+                                <h3 class="video-title" title="Global Skills #2 - Project Planning">Global Skills #2 - Project Planning</h3>
+                                <p class="channel-name">dio.</p>
+                                <p class="video-stats">2,1 mil visualizações &bull; Transmitido há 2 dias</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Video Card 12 -->
+                    <article class="video-card">
+                        <div class="thumbnail-container">
+                            <img src="assets/img/thumbs/Como aprender Phython do Zero.jpg" alt="Como aprender a programar Python do ZERO" class="thumbnail-img" loading="lazy">
+                            <span class="video-duration">1:12:05</span>
+                        </div>
+                        <div class="video-details">
+                            <div class="channel-avatar">
+                                <img src="assets/img/channels/Channel Avatar.svg" alt="Avatar do canal dio.">
+                            </div>
+                            <div class="video-meta">
+                                <h3 class="video-title" title="Como aprender a programar Python do ZERO">Como aprender a programar Python do ZERO</h3>
+                                <p class="channel-name">dio.</p>
+                                <p class="video-stats">711 visualizações &bull; Transmitido há 2 dias</p>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- Rodapé Solicitado no Final da Página -->
+            <footer class="app-footer" role="contentinfo">
+                <p>&copy;2026 - Pedro Zeferino da Silva</p>
+            </footer>
+        </main>
+
+        <!-- Barra de Navegação Inferior para Dispositivos Móveis (Mobile Bottom Bar UX) -->
+        <nav class="mobile-bottom-nav" aria-label="Navegação Móvel Inferior">
+            <a href="#" class="mobile-nav-item active">
+                <img src="assets/icons/home.svg" alt="Início" class="mobile-nav-icon">
+                <span>Início</span>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <img src="assets/icons/compass.svg" alt="Explorar" class="mobile-nav-icon">
+                <span>Explorar</span>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <img src="assets/icons/subscriptions.svg" alt="Inscrições" class="mobile-nav-icon">
+                <span>Inscrições</span>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <img src="assets/icons/download.svg" alt="Downloads" class="mobile-nav-icon">
+                <span>Downloads</span>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <div class="mobile-avatar-icon">P</div>
+                <span>Você</span>
+            </a>
+        </nav>
+    </div>
+</body>
+</html>
