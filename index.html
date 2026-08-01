@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Página de listagem de vídeos no estilo YouTube BR construída com HTML5 semântico, CSS Grid Layout, carrossel e alternância de temas 100% livres de JavaScript.">
     <meta name="theme-color" content="#0f0f0f">
+    <meta property="og:title" content="YouTube BR - Página de Vídeos (Puro HTML & CSS)">
+    <meta property="og:description" content="Listagem de vídeos estilo YouTube com CSS Grid Layout, tema claro/escuro e carrossel 100% sem JavaScript.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/img/preview.png">
+    <meta name="twitter:card" content="summary_large_image">
     <title>YouTube BR - Página de Vídeos (Puro HTML & CSS)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +17,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Link de Acessibilidade: Pular para o Conteúdo Principal -->
+    <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
+
     <!-- Checkbox Tecnico para Alternar Tema sem JS (CSS Checkbox Hack) -->
     <input type="checkbox" id="theme-toggle" class="theme-checkbox" aria-label="Alternar Tema Claro e Escuro">
 
@@ -45,7 +53,7 @@
             <div class="header-center">
                 <form class="search-form" action="#" method="GET" role="search" aria-label="Pesquisar vídeos">
                     <div class="search-input-wrapper">
-                        <input type="text" class="search-input" placeholder="Pesquisar" aria-label="Pesquisar conteúdo">
+                        <input type="search" class="search-input" placeholder="Pesquisar" aria-label="Pesquisar conteúdo">
                         <button type="button" class="virtual-keyboard-btn" title="Teclado virtual" aria-label="Abrir teclado virtual">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M20 5H4c-1.1 0-1.99.9-1.99 2L2 17c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2V8zm0 3h2v2h-2v-2zM8 8h2v2H8V8zm0 3h2v2H8v-2zm-3 0h2v2H5v-2zm0-3h2v2H5V8zm10 7H9v-2h6v2zm1-4h-2v-2h2v2zm0-3h-2V8h2v2zm3 7h-2v-2h2v2zm0-3h-2v-2h2v2z"/>
@@ -108,7 +116,7 @@
             <nav class="sidebar-nav">
                 <ul class="nav-list">
                     <li class="nav-item active">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link" aria-current="page">
                             <img src="assets/icons/home.svg" alt="Início" class="nav-icon">
                             <span class="nav-label">Início</span>
                         </a>
@@ -178,35 +186,35 @@
         </aside>
 
         <!-- Conteúdo Principal -->
-        <main class="main-content" role="main">
+        <main class="main-content" id="main-content" role="main">
             
             <!-- Carrossel da Barra de Categorias -->
             <nav class="category-bar" aria-label="Filtro de Categorias">
-                <div class="category-home-item" title="Voltar ao início">
+                <button type="button" class="category-home-item" title="Voltar ao início" aria-label="Voltar ao início">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                     </svg>
                     <span>Início</span>
-                </div>
+                </button>
                 
                 <div class="category-chips-overflow">
                     <div class="category-chips-track">
-                        <button class="chip active">Tudo</button>
-                        <button class="chip">API</button>
-                        <button class="chip">Podcasts</button>
-                        <button class="chip">Sistema operacional</button>
-                        <button class="chip">Suspenses de ação</button>
-                        <button class="chip">Ao vivo</button>
-                        <button class="chip">Música</button>
-                        <button class="chip">Jogos</button>
-                        <button class="chip">Televisores inteligentes</button>
-                        <button class="chip">Clube Atlético Mineiro</button>
-                        <button class="chip">Tecnologia</button>
-                        <button class="chip">Programação</button>
-                        <button class="chip">Engenharia</button>
-                        <button class="chip">Ciência de Dados</button>
-                        <button class="chip">Machine Learning</button>
-                        <button class="chip">UI/UX Design</button>
+                        <button class="chip active" aria-pressed="true">Tudo</button>
+                        <button class="chip" aria-pressed="false">API</button>
+                        <button class="chip" aria-pressed="false">Podcasts</button>
+                        <button class="chip" aria-pressed="false">Sistema operacional</button>
+                        <button class="chip" aria-pressed="false">Suspenses de ação</button>
+                        <button class="chip" aria-pressed="false">Ao vivo</button>
+                        <button class="chip" aria-pressed="false">Música</button>
+                        <button class="chip" aria-pressed="false">Jogos</button>
+                        <button class="chip" aria-pressed="false">Televisores inteligentes</button>
+                        <button class="chip" aria-pressed="false">Clube Atlético Mineiro</button>
+                        <button class="chip" aria-pressed="false">Tecnologia</button>
+                        <button class="chip" aria-pressed="false">Programação</button>
+                        <button class="chip" aria-pressed="false">Engenharia</button>
+                        <button class="chip" aria-pressed="false">Ciência de Dados</button>
+                        <button class="chip" aria-pressed="false">Machine Learning</button>
+                        <button class="chip" aria-pressed="false">UI/UX Design</button>
                     </div>
                 </div>
 
@@ -229,7 +237,7 @@
                     <!-- Video Card 1 -->
                     <article class="video-card">
                         <div class="thumbnail-container">
-                            <img src="assets/img/thumbs/Ciencia de Dados Unimed BH.jpg" alt="Geração Tech Unimed - BH - Ciência de Dados" class="thumbnail-img" loading="lazy">
+                            <img src="assets/img/thumbs/Ciencia de Dados Unimed BH.jpg" alt="Geração Tech Unimed - BH - Ciência de Dados" class="thumbnail-img" fetchpriority="high">
                             <span class="video-duration live">Ao vivo</span>
                         </div>
                         <div class="video-details">
@@ -453,7 +461,7 @@
 
         <!-- Barra de Navegação Inferior para Dispositivos Móveis (Mobile Bottom Bar UX) -->
         <nav class="mobile-bottom-nav" aria-label="Navegação Móvel Inferior">
-            <a href="#" class="mobile-nav-item active">
+            <a href="#" class="mobile-nav-item active" aria-current="page">
                 <img src="assets/icons/home.svg" alt="Início" class="mobile-nav-icon">
                 <span>Início</span>
             </a>

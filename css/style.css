@@ -6,16 +6,23 @@
 /* --------------------------------------------------------------------------
    1. ELEMENTOS OCULTOS DE CONTROLE
    -------------------------------------------------------------------------- */
+/* Técnica sr-only: mantém os inputs acessíveis ao teclado e leitores de tela */
 .theme-checkbox,
 .carousel-radio {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
 }
 
 /* --------------------------------------------------------------------------
    2. VARIÁVEIS DE TEMA (MODO ESCURO COMO PADRÃO FIEL A HEADER_NOVO.PNG)
    -------------------------------------------------------------------------- */
 :root {
-    color-scheme: dark light;
+    color-scheme: dark;
     
     /* Modo Escuro (Default) */
     --bg-primary: #0f0f0f;
@@ -120,6 +127,33 @@ label:focus-visible {
     outline-offset: 2px;
 }
 
+/* Anel de foco visível nos labels quando os inputs técnicos recebem foco */
+.theme-checkbox:focus-visible ~ .app-container .theme-toggle-btn,
+.carousel-radio:focus-visible ~ .app-container .chip-scroll-btn {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+/* Link "Pular para o conteúdo" (acessibilidade) */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 12px;
+    z-index: 300;
+    background-color: var(--accent-blue);
+    color: #ffffff;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 12px;
+}
+
 /* --------------------------------------------------------------------------
    5. APP CONTAINER - MAIN CSS GRID LAYOUT
    -------------------------------------------------------------------------- */
@@ -131,6 +165,7 @@ label:focus-visible {
         "header header"
         "sidebar main";
     height: 100vh;
+    height: 100dvh; /* Suporte a viewport dinâmica em navegadores móveis */
     width: 100vw;
     overflow: hidden;
     background-color: var(--bg-primary);
@@ -390,7 +425,6 @@ label:focus-visible {
     justify-content: center;
     font-weight: 500;
     font-size: 15px;
-    cursor: pointer;
 }
 
 /* --------------------------------------------------------------------------
@@ -484,6 +518,10 @@ label:focus-visible {
     color: var(--text-primary);
     cursor: pointer;
     padding-right: 8px;
+    background: none;
+    border: none;
+    font-family: inherit;
+    transition: color 0.2s ease;
 }
 
 .category-chips-overflow {
@@ -497,7 +535,6 @@ label:focus-visible {
     align-items: center;
     gap: 12px;
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    will-change: transform;
 }
 
 #cat-p2:checked ~ .app-container .category-chips-track {
@@ -804,7 +841,6 @@ label:focus-visible {
     /* 4. Carrossel da Category Bar no Mobile */
     .category-chips-overflow {
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
     }
     
     .chip-scroll-btn {
@@ -881,5 +917,18 @@ label:focus-visible {
     .app-footer {
         margin-top: 32px;
         padding-bottom: 24px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   13. ACESSIBILIDADE: MOVIMENTO REDUZIDO (PREFERS-REDUCED-MOTION)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }

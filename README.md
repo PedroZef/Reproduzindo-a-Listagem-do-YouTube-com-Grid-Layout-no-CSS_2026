@@ -127,13 +127,13 @@ Como Desenvolvedor **de Tecnologia Full Stack**, o objetivo foi elevar o projeto
 
 ```
 Reproduzindo-a-Listagem-do-YouTube-com-Grid-Layout-no-CSS_2026/
-├── formato-geral.png       # Modelo visual dos Badges do Projeto (DIO, HTML5, CSS3, Status)
 ├── index.html              # Marcação HTML5 Semântica com WAI-ARIA
 ├── css/
 │   └── style.css           # Estilização completa, variáveis, CSS Grid e Temas
 ├── assets/
 │   ├── icons/              # Ícones em formato SVG otimizado
 │   └── img/
+│       ├── preview.png     # Preview do projeto (compartilhamento social / og:image)
 │       ├── channels/       # Avatares de perfis dos canais
 │       └── thumbs/         # Imagens de miniaturas dos vídeos
 └── README.md               # Documentação técnica profissional do repositório
